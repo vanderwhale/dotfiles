@@ -1,0 +1,9 @@
+# Shell history
+.config/fish/fish_history
+.zsh_history
+
+# Local overrides
+.config/kitty/kitty.conf.local
+
+# OS junk
+.DS_Store
