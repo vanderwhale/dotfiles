@@ -187,6 +187,7 @@ local to each computer and are not committed to this repo.
 gitName = "Sam"
 gitEmail = "97985983+vanderwhale@users.noreply.github.com"
 gitSigningKey = "ssh-ed25519 AAAA..."
+gitSshSigningProgram = "C:/path/from/1Password/op-ssh-sign.exe"
 gitGpgSign = true
 manageGitConfig = true
 kittyFontFamily = "IntoneMono Nerd Font Mono"
@@ -202,6 +203,11 @@ machine:
 [data]
 manageGitConfig = false
 ```
+
+For 1Password SSH commit signing, let 1Password store and authorize the private
+key, then copy its **Configure Commit Signing** snippet into local chezmoi data.
+Use the snippet's public key for `gitSigningKey` and its `gpg.ssh.program` path
+for `gitSshSigningProgram`.
 
 On a Windows machine that needs custom UV locations, add this only to that
 machine's local `chezmoi.toml`:

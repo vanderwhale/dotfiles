@@ -6,6 +6,8 @@
 {{- with (index . "gitSigningKey") -}}{{- $gitSigningKey = . -}}{{- end -}}
 {{- $gitGpgSign := true -}}
 {{- if hasKey . "gitGpgSign" -}}{{- $gitGpgSign = .gitGpgSign -}}{{- end -}}
+{{- $gitSshSigningProgram := "" -}}
+{{- with (index . "gitSshSigningProgram") -}}{{- $gitSshSigningProgram = . -}}{{- end -}}
 [user]
 	name = {{ $gitName }}
 	email = {{ $gitEmail }}
@@ -25,7 +27,11 @@
 	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 
 {{ end -}}
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if $gitSshSigningProgram -}}
+[gpg "ssh"]
+	program = {{ $gitSshSigningProgram }}
+
+{{ else if eq .chezmoi.os "darwin" -}}
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
