@@ -1,0 +1,13 @@
+{{- $macFishPath := "/opt/homebrew/bin/fish" -}}
+{{- with (index . "macFishPath") -}}{{- $macFishPath = . -}}{{- end -}}
+{
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.profiles.osx": {
+        "fish": {
+            "path": {{ $macFishPath | quote }},
+            "args": [
+                "-l"
+            ]
+        }
+    }
+}

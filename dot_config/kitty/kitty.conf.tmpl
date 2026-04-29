@@ -1,0 +1,22 @@
+{{- $kittyFontFamily := "IntoneMono Nerd Font Mono" -}}
+{{- with (index . "kittyFontFamily") -}}{{- $kittyFontFamily = . -}}{{- end -}}
+{{- $kittyFontSize := "14.0" -}}
+{{- with (index . "kittyFontSize") -}}{{- $kittyFontSize = . -}}{{- end -}}
+{{- $macFishPath := "/opt/homebrew/bin/fish" -}}
+{{- with (index . "macFishPath") -}}{{- $macFishPath = . -}}{{- end -}}
+# BEGIN_KITTY_THEME
+# Hardcore
+include current-theme.conf
+# END_KITTY_THEME
+
+# BEGIN_KITTY_FONTS
+font_family      family="{{ $kittyFontFamily }}"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+font_size {{ $kittyFontSize }}
+# END_KITTY_FONTS
+
+{{ if eq .chezmoi.os "darwin" -}}
+shell {{ $macFishPath }}
+{{ end -}}

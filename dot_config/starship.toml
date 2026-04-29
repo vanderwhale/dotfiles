@@ -1,3 +1,95 @@
+command_timeout = 10000
+
+format = """
+$username\
+$hostname\
+$os\
+$shell\
+$directory\
+$sudo\
+\n$character"""
+
+right_format = """
+$docker_context\
+$conda\
+$python\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$cmd_duration\
+$time
+"""
+
+[username]
+show_always = true
+format = "[$user]($style)"
+style_user = 'bold #a6e22e'
+
+[hostname]
+ssh_symbol = " "
+ssh_only = false
+format = "@[$hostname](bold #9e6ffe) "
+
+[os]
+disabled = false
+style = "bold #50a4db"
+
+[localip]
+ssh_only = true
+format = '@[$localipv4](bold red) '
+disabled = false
+style = '#ff669d'
+
+[shell]
+fish_indicator = " "
+bash_indicator = 'bsh'
+zsh_indicator = 'zsh'
+style = "#ff669d"
+disabled = false
+
+[sudo]
+format = '[$symbol]($style)'
+style = 'bold orange'
+symbol = '󰚑 '
+disabled = false
+
+[directory]
+read_only = " 🔒"
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path](#beed5f) "
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✖](bold red)"
+
+# Git Branch
+[git_branch]
+symbol = " "
+format = "on [$branch]($style) "
+
+# Git Commit
+[git_commit]
+format = "([$hash]($style)) "
+
+# Git Status
+[git_status]
+format = '[\[$all_status$ahead_behind\]]($style) '
+style = "bold red"
+
+[cmd_duration]
+min_time = 4
+show_milliseconds = false
+disabled = false
+format = " [ $duration](#e6db74) "
+
+[time]
+format = "[󰥔 $time](bold #fd971f) "
+time_format = "%R"
+disabled = false
+
+
 [aws]
 symbol = "  "
 
@@ -9,6 +101,7 @@ symbol = " "
 
 [conda]
 symbol = " "
+format = '[$symbol$environment](dimmed green) '
 
 [crystal]
 symbol = " "
@@ -16,11 +109,8 @@ symbol = " "
 [dart]
 symbol = " "
 
-[directory]
-read_only = " 󰌾"
-
 [docker_context]
-symbol = " "
+format = ' [🐋](blue bold)'
 
 [elixir]
 symbol = " "
@@ -33,12 +123,6 @@ symbol = " "
 
 [fossil_branch]
 symbol = " "
-
-[git_branch]
-symbol = " "
-
-[git_commit]
-tag_symbol = '  '
 
 [golang]
 symbol = " "
@@ -54,9 +138,6 @@ symbol = " "
 
 [hg_branch]
 symbol = " "
-
-[hostname]
-ssh_symbol = " "
 
 [java]
 symbol = " "
@@ -146,25 +227,13 @@ symbol = " "
 symbol = " "
 
 [python]
+format = "[$symbol $version]($style) "
 symbol = " "
 
 [rlang]
+format = 'with [📐 $version](blue bold) '
 symbol = "󰟔 "
 
-[ruby]
-symbol = " "
 
 [rust]
-symbol = "󱘗 "
-
-[scala]
-symbol = " "
-
-[swift]
-symbol = " "
-
-[zig]
-symbol = " "
-
-[gradle]
-symbol = " "
+symbol = " "

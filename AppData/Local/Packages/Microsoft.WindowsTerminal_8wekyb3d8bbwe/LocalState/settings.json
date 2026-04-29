@@ -1,0 +1,51 @@
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "initialCols": 120,
+    "initialRows": 32,
+    "profiles": {
+        "defaults": {
+            "colorScheme": "Hardcore",
+            "font": {
+                "face": "IntoneMono Nerd Font Mono",
+                "size": 11
+            }
+        },
+        "list": [
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "name": "PowerShell 7",
+                "commandline": "pwsh.exe",
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "startingDirectory": "%USERPROFILE%"
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "name": "Hardcore",
+            "background": "#121212",
+            "foreground": "#a0a0a0",
+            "cursorColor": "#bbbbbb",
+            "selectionBackground": "#453a39",
+            "black": "#1b1d1e",
+            "brightBlack": "#505354",
+            "red": "#f92672",
+            "brightRed": "#ff669d",
+            "green": "#a6e22e",
+            "brightGreen": "#beed5f",
+            "yellow": "#fd971f",
+            "brightYellow": "#e6db74",
+            "blue": "#66d9ef",
+            "brightBlue": "#66d9ef",
+            "purple": "#9e6ffe",
+            "brightPurple": "#9e6ffe",
+            "cyan": "#5e7175",
+            "brightCyan": "#a3babf",
+            "white": "#ccccc6",
+            "brightWhite": "#f8f8f2"
+        }
+    ]
+}

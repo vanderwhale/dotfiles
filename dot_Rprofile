@@ -1,0 +1,19 @@
+options(
+  repos = c(
+    CRAN = "https://cloud.r-project.org"
+  ),
+  pkg.use_bioconductor = FALSE
+)
+
+if (!requireNamespace("pak", quietly = TRUE)) {
+  message("pak is not installed. Run: install.packages('pak')")
+}
+
+# Avoid auto-activating renv if you want manual control:
+# Sys.setenv(RENV_CONFIG_AUTOLOADER_ENABLED = "FALSE")
+
+message(sprintf(
+  "📦 R profile loaded | R %s | Bioconductor=%s",
+  getRversion(),
+  if (isTRUE(getOption("pkg.use_bioconductor"))) "ON" else "OFF"
+))

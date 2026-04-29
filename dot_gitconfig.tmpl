@@ -1,0 +1,32 @@
+{{- $gitName := "Sam" -}}
+{{- with (index . "gitName") -}}{{- $gitName = . -}}{{- end -}}
+{{- $gitEmail := "97985983+vanderwhale@users.noreply.github.com" -}}
+{{- with (index . "gitEmail") -}}{{- $gitEmail = . -}}{{- end -}}
+{{- $gitSigningKey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFgDmVincJpZdNCe8pzVsNLEkGHIJgHG3efagza7eFA" -}}
+{{- with (index . "gitSigningKey") -}}{{- $gitSigningKey = . -}}{{- end -}}
+{{- $gitGpgSign := true -}}
+{{- with (index . "gitGpgSign") -}}{{- $gitGpgSign = . -}}{{- end -}}
+[user]
+	name = {{ $gitName }}
+	email = {{ $gitEmail }}
+	signingkey = {{ $gitSigningKey }}
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[gpg]
+	format = ssh
+
+{{ if eq .chezmoi.os "darwin" -}}
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+{{ end -}}
+[commit]
+	gpgsign = {{ $gitGpgSign }}
+
+[init]
+	defaultBranch = main
