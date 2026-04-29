@@ -1,3 +1,9 @@
+{{- with (index . "windowsUvEnvironment") }}
+{{- range $name, $value := . }}
+$env:{{ $name }} = {{ $value | quote }}
+{{- end }}
+
+{{- end }}
 $starshipConfig = Join-Path $HOME ".config\starship.toml"
 if (Test-Path $starshipConfig) {
     $env:STARSHIP_CONFIG = $starshipConfig
