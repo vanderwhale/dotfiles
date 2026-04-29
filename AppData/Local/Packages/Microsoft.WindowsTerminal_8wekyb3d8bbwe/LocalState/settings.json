@@ -1,51 +1,73 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "actions": [],
     "copyFormatting": "none",
     "copyOnSelect": false,
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "initialCols": 120,
     "initialRows": 32,
-    "profiles": {
-        "defaults": {
+    "keybindings": [],
+    "launchMode": "maximized",
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
             "colorScheme": "Hardcore",
-            "font": {
+            "font": 
+            {
                 "face": "IntoneMono Nerd Font Mono",
                 "size": 11
             }
         },
-        "list": [
+        "list": 
+        [
             {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "name": "PowerShell 7",
                 "commandline": "pwsh.exe",
+                "font": 
+                {
+                    "size": 18
+                },
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell 7",
+                "source": "Windows.Terminal.PowershellCore",
                 "startingDirectory": "%USERPROFILE%"
             }
         ]
     },
-    "schemes": [
+    "schemes": 
+    [
         {
-            "name": "Hardcore",
             "background": "#121212",
-            "foreground": "#a0a0a0",
-            "cursorColor": "#bbbbbb",
-            "selectionBackground": "#453a39",
-            "black": "#1b1d1e",
+            "black": "#1B1D1E",
+            "blue": "#66D9EF",
             "brightBlack": "#505354",
-            "red": "#f92672",
-            "brightRed": "#ff669d",
-            "green": "#a6e22e",
-            "brightGreen": "#beed5f",
-            "yellow": "#fd971f",
-            "brightYellow": "#e6db74",
-            "blue": "#66d9ef",
-            "brightBlue": "#66d9ef",
-            "purple": "#9e6ffe",
-            "brightPurple": "#9e6ffe",
-            "cyan": "#5e7175",
-            "brightCyan": "#a3babf",
-            "white": "#ccccc6",
-            "brightWhite": "#f8f8f2"
+            "brightBlue": "#66D9EF",
+            "brightCyan": "#A3BABF",
+            "brightGreen": "#BEED5F",
+            "brightPurple": "#9E6FFE",
+            "brightRed": "#FF669D",
+            "brightWhite": "#F8F8F2",
+            "brightYellow": "#E6DB74",
+            "cursorColor": "#BBBBBB",
+            "cyan": "#5E7175",
+            "foreground": "#A0A0A0",
+            "green": "#A6E22E",
+            "name": "Hardcore",
+            "purple": "#9E6FFE",
+            "red": "#F92672",
+            "selectionBackground": "#453A39",
+            "white": "#CCCCC6",
+            "yellow": "#FD971F"
         }
-    ]
+    ],
+    "themes": []
 }
