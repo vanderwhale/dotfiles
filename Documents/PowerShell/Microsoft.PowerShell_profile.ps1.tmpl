@@ -15,7 +15,7 @@ if (Get-Command fd -ErrorAction SilentlyContinue) {
 }
 
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    Invoke-Expression (&zoxide init powershell)
+    Invoke-Expression ((& zoxide init powershell) -join [Environment]::NewLine)
 }
 
 if (Get-Command eza -ErrorAction SilentlyContinue) {
@@ -45,5 +45,5 @@ if (Get-Command fzf -ErrorAction SilentlyContinue) {
 }
 
 if (Get-Command starship -ErrorAction SilentlyContinue) {
-    Invoke-Expression (&starship init powershell)
+    Invoke-Expression ((& starship init powershell) -join [Environment]::NewLine)
 }
