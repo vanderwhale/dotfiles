@@ -5,7 +5,7 @@
 {{- $gitSigningKey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFgDmVincJpZdNCe8pzVsNLEkGHIJgHG3efagza7eFA" -}}
 {{- with (index . "gitSigningKey") -}}{{- $gitSigningKey = . -}}{{- end -}}
 {{- $gitGpgSign := true -}}
-{{- with (index . "gitGpgSign") -}}{{- $gitGpgSign = . -}}{{- end -}}
+{{- if hasKey . "gitGpgSign" -}}{{- $gitGpgSign = .gitGpgSign -}}{{- end -}}
 [user]
 	name = {{ $gitName }}
 	email = {{ $gitEmail }}

@@ -31,6 +31,119 @@ The Windows PowerShell and Windows Terminal files are ignored on non-Windows
 systems by `.chezmoiignore`. The macOS editor settings are ignored on non-macOS
 systems.
 
+## Setup
+
+Clone and apply these dotfiles with chezmoi. Use the SSH URL if the machine
+already has GitHub SSH access:
+
+```sh
+chezmoi init git@github.com:vanderwhale/dotfiles.git
+chezmoi diff
+chezmoi apply
+```
+
+Use HTTPS on a fresh machine before SSH is set up:
+
+```sh
+chezmoi init https://github.com/vanderwhale/dotfiles.git
+chezmoi diff
+chezmoi apply
+```
+
+### macOS
+
+Install Homebrew, then install the tools used by these dotfiles:
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install chezmoi fish starship zoxide fzf fd eza git git-lfs gh uv
+brew install --cask kitty font-intone-mono-nerd-font visual-studio-code positron
+```
+
+Optional app setup:
+
+```sh
+$(brew --prefix)/opt/fzf/install
+git lfs install
+```
+
+Then initialize and apply:
+
+```sh
+chezmoi init git@github.com:vanderwhale/dotfiles.git
+chezmoi diff
+chezmoi apply
+```
+
+### Windows
+
+Install the core tools with winget from PowerShell:
+
+```powershell
+winget install -e --id twpayne.chezmoi
+winget install -e --id Microsoft.PowerShell
+winget install -e --id Microsoft.WindowsTerminal
+winget install -e --id Starship.Starship
+winget install -e --id ajeetdsouza.zoxide
+winget install -e --id eza-community.eza
+winget install -e --id sharkdp.fd
+winget install -e --id junegunn.fzf
+winget install -e --id Git.Git
+winget install -e --id GitHub.cli
+winget install -e --id astral-sh.uv
+```
+
+Install the PowerShell fzf integration if you want the profile keybindings:
+
+```powershell
+Install-Module PSFzf -Scope CurrentUser
+```
+
+Install the IntoneMono Nerd Font on Windows. If winget does not provide it on
+your machine, install `IntoneMonoNerdFontMono-Regular.ttf` and its variants
+from Nerd Fonts manually.
+
+Then initialize and apply:
+
+```powershell
+chezmoi init git@github.com:vanderwhale/dotfiles.git
+chezmoi diff
+chezmoi apply
+```
+
+### Debian
+
+Install the packages available from Debian first:
+
+```sh
+sudo apt update
+sudo apt install -y git git-lfs curl ca-certificates fish fzf fd-find zoxide gh
+```
+
+Debian often installs `fd` as `fdfind`. Add a local alias or symlink if needed:
+
+```sh
+mkdir -p ~/.local/bin
+ln -s "$(command -v fdfind)" ~/.local/bin/fd
+```
+
+Install chezmoi with its upstream installer if it is not available from your
+Debian repositories:
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)"
+```
+
+Install Starship, eza, uv, and the Nerd Font using their current upstream
+instructions when Debian's packaged versions are unavailable or too old. After
+that:
+
+```sh
+chezmoi init git@github.com:vanderwhale/dotfiles.git
+chezmoi diff
+chezmoi apply
+```
+
 ## Shell Defaults
 
 - macOS login shell remains Zsh. These dotfiles do not run `chsh` or change the account login shell.
@@ -75,10 +188,19 @@ gitName = "Sam"
 gitEmail = "97985983+vanderwhale@users.noreply.github.com"
 gitSigningKey = "ssh-ed25519 AAAA..."
 gitGpgSign = true
+manageGitConfig = true
 kittyFontFamily = "IntoneMono Nerd Font Mono"
 kittyFontSize = "14.0"
 macFishPath = "/opt/homebrew/bin/fish"
 macTerminalShell = "fish"
+```
+
+To leave a machine's existing `~/.gitconfig` unmanaged, set this only on that
+machine:
+
+```toml
+[data]
+manageGitConfig = false
 ```
 
 On a Windows machine that needs custom UV locations, add this only to that

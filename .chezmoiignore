@@ -8,6 +8,12 @@ README.md
 # Local overrides
 .config/kitty/kitty.conf.local
 
+{{- $manageGitConfig := true -}}
+{{- if hasKey . "manageGitConfig" -}}{{- $manageGitConfig = .manageGitConfig -}}{{- end }}
+{{ if not $manageGitConfig }}
+.gitconfig
+{{ end }}
+
 {{ if ne .chezmoi.os "windows" }}
 AppData/
 Documents/
