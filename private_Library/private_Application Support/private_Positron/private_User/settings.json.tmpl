@@ -1,6 +1,11 @@
 {{- $macFishPath := "/opt/homebrew/bin/fish" -}}
 {{- with (index . "macFishPath") -}}{{- $macFishPath = . -}}{{- end -}}
 {
+    "workbench.colorTheme": "Default Positron Dark",
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 15,
+    "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true{{ if stat $macFishPath }},
     "terminal.integrated.defaultProfile.osx": "fish",
     "terminal.integrated.profiles.osx": {
         "fish": {
@@ -9,5 +14,5 @@
                 "-l"
             ]
         }
-    }
+    }{{ end }}
 }

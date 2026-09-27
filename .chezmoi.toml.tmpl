@@ -1,0 +1,30 @@
+{{- $machineProfiles := list "personal" "shared" "server" "work" -}}
+{{- $machineProfile := promptChoiceOnce . "machineProfile" "Machine profile" $machineProfiles "personal" -}}
+{{- $gitName := "" -}}
+{{- $gitEmail := "" -}}
+{{- $gitSigningKey := "" -}}
+{{- $gitGpgSign := false -}}
+{{- if eq $machineProfile "shared" -}}
+{{-   $gitName = promptStringOnce . "gitName" "Git author name for this Mac" "Sam" -}}
+{{-   $gitEmail = promptStringOnce . "gitEmail" "Git author email for this Mac" "97985983+vanderwhale@users.noreply.github.com" -}}
+{{-   $gitGpgSign = promptBoolOnce . "gitGpgSign" "Sign Git commits on this Mac" true -}}
+{{-   if $gitGpgSign -}}
+{{-     $gitSigningKey = promptStringOnce . "gitSigningKey" "1Password Git signing public key" -}}
+{{-   end -}}
+{{- end -}}
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+[data]
+    # personal: trusted personal macOS, Fedora, and Windows computers
+    # shared:   a shared Mac with your shell customizations and 1Password account
+    # server:   minimally trusted Debian and Ubuntu shell configuration
+    # work:     work Windows computer; PowerShell profile only
+    machineProfile = {{ $machineProfile | quote }}
+{{ if eq $machineProfile "shared" -}}
+    gitName = {{ $gitName | quote }}
+    gitEmail = {{ $gitEmail | quote }}
+    gitGpgSign = {{ $gitGpgSign }}
+{{ if $gitGpgSign -}}
+    gitSigningKey = {{ $gitSigningKey | quote }}
+{{ end -}}
+{{ end -}}

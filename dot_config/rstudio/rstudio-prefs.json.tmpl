@@ -5,6 +5,8 @@
     "save_workspace": "never",
     "load_workspace": false,
     "initial_working_directory": "~",
+    "rmd_auto_date": true,
+    "document_author": "Sam Vandewalle",
     "graphics_backend": "ragg",
     "auto_detect_indentation": true,
     "soft_wrap_r_files": true,
@@ -22,10 +24,46 @@
     "warn_variable_defined_but_not_used": true,
     "style_diagnostics": true,
     "indent_guides": "rainbowfills",
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer",
+            "Presentations"
+        ],
+        "hiddenTabSet": [],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "visual_markdown_editing_show_margin": true,
+    "visual_markdown_code_editor_line_numbers": true,
+    "visual_markdown_editing_list_spacing": "tight",
+    "default_project_location": "~",
+    "new_proj_git_init": true,
+    "new_proj_use_renv": true,
+    "show_hidden_files": true,
     "syntax_color_console": true,
     "console_double_click_select": true,
-    "help_font_size_points": 12,
-    "font_size_points": 14,
+    "help_font_size_points": 11,
+    "font_size_points": 16{{ if stat "/opt/homebrew/bin/fish" }},
     "editor_theme": "Tomorrow Night 80s",
-    "posix_terminal_shell": {{ $macTerminalShell | quote }}
+    "posix_terminal_shell": {{ $macTerminalShell | quote }}{{ end }}
 }

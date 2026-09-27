@@ -1,0 +1,27 @@
+{{- $macFishPath := "/opt/homebrew/bin/fish" -}}
+{{- with (index . "macFishPath") -}}{{- $macFishPath = . -}}{{- end -}}
+{
+    "editor.accessibilitySupport": "off",
+    "redhat.telemetry.enabled": false,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
+    },
+    "workbench.colorTheme": "Tomorrow Night Bright",
+    "workbench.iconTheme": "material-icon-theme"{{ if stat $macFishPath }},
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "terminal.integrated.profiles.osx": {
+        "fish": {
+            "path": {{ $macFishPath | quote }},
+            "args": [
+                "-l"
+            ]
+        }
+    }{{ end }}
+}

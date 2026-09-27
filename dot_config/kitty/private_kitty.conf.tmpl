@@ -1,6 +1,6 @@
 {{- $kittyFontFamily := "IntoneMono Nerd Font Mono" -}}
 {{- with (index . "kittyFontFamily") -}}{{- $kittyFontFamily = . -}}{{- end -}}
-{{- $kittyFontSize := "14.0" -}}
+{{- $kittyFontSize := "18.0" -}}
 {{- with (index . "kittyFontSize") -}}{{- $kittyFontSize = . -}}{{- end -}}
 {{- $macFishPath := "/opt/homebrew/bin/fish" -}}
 {{- with (index . "macFishPath") -}}{{- $macFishPath = . -}}{{- end -}}
@@ -17,6 +17,6 @@ bold_italic_font auto
 font_size {{ $kittyFontSize }}
 # END_KITTY_FONTS
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if and (eq .chezmoi.os "darwin") (stat $macFishPath) -}}
 shell {{ $macFishPath }}
 {{ end -}}

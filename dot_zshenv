@@ -1,1 +1,9 @@
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+# 1Password uses the same per-user socket location for every macOS account.
+# Leave SSH_AUTH_SOCK untouched on Linux so forwarded or local agents keep working.
+if [[ "$OSTYPE" == darwin* ]]; then
+  export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+fi

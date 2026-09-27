@@ -1,6 +1,9 @@
 README.md
 .DS_Store
 
+{{- $profile := "personal" -}}
+{{- with (index . "machineProfile") -}}{{- $profile = . -}}{{- end }}
+
 # Shell history
 .config/fish/fish_history
 .zsh_history
@@ -20,5 +23,47 @@ Documents/
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
+Library/
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+# Unix-only configuration is never installed on Windows.
+.bash_profile
+.bashrc
+.config/fish/
+.config/kitty/
+.config/rstudio/
+.fzf.bash
+.fzf.zsh
+.profile
+.zprofile
+.zshenv
+.zshrc
+{{ end }}
+
+{{ if eq $profile "server" }}
+# Servers receive shell configuration only, without personal identity or GUI apps.
+.Rprofile
+.config/gh/
+.config/kitty/
+.config/rstudio/
+.config/starship.toml
+.gitconfig
+{{ end }}
+
+{{ if eq $profile "work" }}
+# Work Windows machines receive only the PowerShell profile.
+.Rprofile
+.bash_profile
+.bashrc
+.config/
+.fzf.bash
+.fzf.zsh
+.gitconfig
+.profile
+.zprofile
+.zshenv
+.zshrc
+AppData/
 Library/
 {{ end }}

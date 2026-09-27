@@ -4,8 +4,8 @@ This directory is a chezmoi source tree for one shared set of dotfiles.
 
 ## Shared
 
-- `dot_gitconfig.tmpl` - Git identity, Git LFS, SSH commit signing, and default branch settings with per-machine overrides.
-- `dot_config/gh/config.yml` - GitHub CLI preferences and aliases.
+- `private_dot_gitconfig.tmpl` - Git identity, Git LFS, SSH commit signing, and default branch settings with per-machine overrides.
+- `dot_config/private_gh/private_config.yml` - GitHub CLI preferences and aliases.
 - `dot_config/starship.toml` - Starship prompt layout, colors, symbols, and module settings.
 - `dot_Rprofile` - R startup options, CRAN mirror, pak check, and startup message.
 - `dot_profile` - POSIX shell profile that loads Cargo environment setup.
@@ -16,11 +16,11 @@ This directory is a chezmoi source tree for one shared set of dotfiles.
 - `dot_zshenv` - Early Zsh environment setup for Cargo.
 - `dot_zshrc` - Interactive Zsh setup for Homebrew, Oh My Zsh, fzf, zoxide, and Starship.
 - `dot_config/private_fish/config.fish` - Fish PATH setup and interactive tool initialization.
-- `dot_config/kitty/kitty.conf.tmpl` - Kitty IntoneMono Nerd Font, theme configuration, and macOS-only Fish shell launch setting.
+- `dot_config/kitty/private_kitty.conf.tmpl` - Kitty IntoneMono Nerd Font, theme configuration, and macOS-only Fish shell launch setting.
 - `dot_config/kitty/current-theme.conf` - Kitty color palette.
 - `dot_config/rstudio/rstudio-prefs.json.tmpl` - RStudio editor, workspace, diagnostics, UI preferences, and templated terminal shell setting.
-- `Library/Application Support/Code/User/settings.json.tmpl` - VS Code integrated terminal profile with templated Fish path.
-- `Library/Application Support/Positron/User/settings.json.tmpl` - Positron integrated terminal profile with templated Fish path.
+- `private_Library/private_Application Support/private_Code/private_User/settings.json.tmpl` - VS Code integrated terminal profile with templated Fish path.
+- `private_Library/private_Application Support/private_Positron/private_User/settings.json.tmpl` - Positron integrated terminal profile with templated Fish path.
 
 ## Windows
 
@@ -32,6 +32,16 @@ systems by `.chezmoiignore`. The macOS editor settings are ignored on non-macOS
 systems.
 
 ## Setup
+
+During initialization, choose a machine profile:
+
+- `personal` for trusted personal macOS, Fedora, and Windows computers.
+- `shared` for the shared Mac. It receives the Mac customizations and uses the
+  1Password agent belonging to the signed-in macOS account. Initialization also
+  records that Mac's Git identity and 1Password signing public key locally.
+- `server` for Debian and Ubuntu servers. It receives shell configuration but
+  no personal Git identity, GitHub CLI configuration, or desktop-app settings.
+- `work` for the work Windows computer. It receives only the PowerShell profile.
 
 Clone and apply these dotfiles with chezmoi. Use the SSH URL if the machine
 already has GitHub SSH access:
@@ -150,6 +160,15 @@ chezmoi apply
 - Kitty on macOS launches Fish with `shell /opt/homebrew/bin/fish`.
 - RStudio, VS Code, and Positron on macOS use Fish for their integrated terminals.
 - Windows Terminal defaults to PowerShell 7 with `pwsh.exe`.
+- macOS shells use the current account's 1Password SSH agent socket.
+- Linux leaves `SSH_AUTH_SOCK` unchanged so local or explicitly forwarded agents
+  continue to work.
+- GitHub CLI uses SSH for Git operations on profiles where its configuration is
+  managed; servers and work Windows machines do not receive that configuration.
+- Kitty, RStudio, VS Code, and Positron select Fish on macOS only when the
+  configured Fish executable exists at apply time.
+- Apple Terminal's Basic profile uses IntoneMono Nerd Font Mono at 18pt with
+  Hardcore foreground/background colors, so its Starship prompt matches Kitty.
 
 ## Kitty Theme
 
@@ -172,7 +191,7 @@ chezmoi apply
 | bright blue | `#66d9ef` |
 | magenta | `#9e6ffe` |
 | bright magenta | `#9e6ffe` |
-| cyan | `#5e7175` |
+| cyan | `#7f999f` |
 | bright cyan | `#a3babf` |
 | white | `#ccccc6` |
 | bright white | `#f8f8f2` |
@@ -191,7 +210,7 @@ gitSshSigningProgram = "C:/path/from/1Password/op-ssh-sign.exe"
 gitGpgSign = true
 manageGitConfig = true
 kittyFontFamily = "IntoneMono Nerd Font Mono"
-kittyFontSize = "14.0"
+kittyFontSize = "18.0"
 macFishPath = "/opt/homebrew/bin/fish"
 macTerminalShell = "fish"
 ```

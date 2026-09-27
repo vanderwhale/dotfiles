@@ -1,0 +1,21 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+set -eu
+
+# Keep Apple Terminal's default profile visually aligned with Kitty. AppleScript
+# colors use 16-bit RGB components (8-bit channel value multiplied by 257).
+/usr/bin/osascript <<'APPLESCRIPT'
+tell application "Terminal"
+    set basicProfile to settings set "Basic"
+    set font name of basicProfile to "IntoneMonoNFM"
+    set font size of basicProfile to 18
+    set font antialiasing of basicProfile to true
+    set background color of basicProfile to {4626, 4626, 4626}
+    set normal text color of basicProfile to {41120, 41120, 41120}
+    set bold text color of basicProfile to {63736, 63736, 62194}
+    set cursor color of basicProfile to {48059, 48059, 48059}
+    set default settings to basicProfile
+    set startup settings to basicProfile
+end tell
+APPLESCRIPT
+{{ end -}}
