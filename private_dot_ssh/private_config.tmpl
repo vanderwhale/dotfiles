@@ -1,0 +1,69 @@
+# OrbStack must remain before Host blocks.
+{{ if eq .chezmoi.os "darwin" -}}
+Include ~/.orbstack/ssh/config
+Include ~/.ssh/1Password/config
+{{ end -}}
+
+# --- ruby ---
+
+Host gemstone
+    HostName 10.100.91.1
+    User netadmin
+    IdentitiesOnly yes
+
+Host gemstone-sara
+    HostName 10.100.91.1
+    User sara
+    IdentitiesOnly yes
+
+Host takodana
+    HostName 10.0.0.9
+    User maz
+
+Host blue
+    HostName 10.0.0.50
+    User blue
+
+Host yavin
+    HostName yavin.local
+    User darths
+
+# --- basecamp ---
+
+Host cruiser
+    HostName 10.220.40.10
+    User smooth
+    IdentityFile ~/.ssh/cruiser.pub
+    IdentitiesOnly yes
+
+Host anchor
+    HostName 10.220.40.20
+    User chain
+    IdentityFile ~/.ssh/anchor.pub
+    IdentitiesOnly yes
+
+Host octopus
+    HostName 10.220.90.1
+    User admin
+    IdentityFile ~/.ssh/basecamp_network_admin.pub
+    IdentitiesOnly yes
+
+Host starfish
+    HostName 10.220.90.2
+    User admin
+    IdentityFile ~/.ssh/basecamp_network_admin.pub
+    IdentitiesOnly yes
+
+# --- services ---
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_auth_ed25519.pub
+  IdentitiesOnly yes
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Use the 1Password SSH agent by default on this Mac.
+Host *
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ end -}}
