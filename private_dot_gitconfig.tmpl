@@ -34,10 +34,21 @@
 {{ else if eq .chezmoi.os "darwin" -}}
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.ssh/allowed_signers
 
 {{ end -}}
+
 [commit]
 	gpgsign = {{ $gitGpgSign }}
 
 [init]
 	defaultBranch = main
+
+{{ if eq .chezmoi.os "darwin" -}}
+[diff]
+	tool = kitty
+
+[difftool "kitty"]
+	cmd = kitten diff "$LOCAL" "$REMOTE"
+
+{{ end -}}

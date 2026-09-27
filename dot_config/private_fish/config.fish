@@ -4,6 +4,8 @@ end
 
 # Starship supplies the prompt in every interactive terminal.
 set --global fish_greeting
+set --global --export EDITOR micro
+set --global --export VISUAL micro
 
 if test -d /usr/local/bin
     fish_add_path -g /usr/local/bin
