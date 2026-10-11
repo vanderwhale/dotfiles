@@ -20,3 +20,7 @@ font_size {{ $kittyFontSize }}
 {{ if and (eq .chezmoi.os "darwin") (stat $macFishPath) -}}
 shell {{ $macFishPath }}
 {{ end -}}
+
+
+allow_remote_control socket-only
+listen_on unix:${HOME}/.kitty-{kitty_pid}.sock
