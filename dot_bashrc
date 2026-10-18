@@ -1,27 +1,62 @@
-if [ -d /opt/homebrew/bin ]; then
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# ~/.bashrc — managed by chezmoi
+
+# Interactive shells only
+[[ $- != *i* ]] && return
+
+# History
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=20000
+shopt -s histappend
+shopt -s checkwinsize
+
+# User executables
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+
+# macOS Homebrew
+if [[ "$(uname)" == "Darwin" && -d /opt/homebrew/bin ]]; then
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
-if [ -d /usr/local/bin ]; then
-  export PATH="/usr/local/bin:$PATH"
+# Linux utilities
+if [[ "$(uname)" == "Linux" ]]; then
+    [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
+
+    if [[ -x /usr/bin/dircolors ]]; then
+        eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        alias grep='grep --color=auto'
+    fi
+
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+
+    # Bash completion
+    if ! shopt -oq posix; then
+        if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+            source /usr/share/bash-completion/bash_completion
+        elif [[ -f /etc/bash_completion ]]; then
+            source /etc/bash_completion
+        fi
+    fi
 fi
 
-if [ -f "$HOME/.fzf.bash" ]; then
-  source "$HOME/.fzf.bash"
-fi
+# Custom aliases
+[[ -f "$HOME/.bash_aliases" ]] && source "$HOME/.bash_aliases"
 
-if [ -f "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
-fi
+# fzf
+[[ -f "$HOME/.fzf.bash" ]] && source "$HOME/.fzf.bash"
 
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init bash)"
-fi
+# Rust
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init bash)"
-fi
+# zoxide
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
 
-if [ -f "$HOME/.orbstack/shell/init.bash" ]; then
-  source "$HOME/.orbstack/shell/init.bash"
-fi
+# Starship prompt
+command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
+
+# OrbStack
+[[ -f "$HOME/.orbstack/shell/init.bash" ]] &&
+    source "$HOME/.orbstack/shell/init.bash"
