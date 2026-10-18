@@ -45,7 +45,7 @@
 	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 {{ end -}}
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
 [diff]
 	tool = kitty
 

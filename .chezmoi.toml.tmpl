@@ -17,7 +17,7 @@ umask = 0o022
 
 [edit]
     command = "micro"
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
 [diff]
     command = "kitten"
     args = ["diff"]
