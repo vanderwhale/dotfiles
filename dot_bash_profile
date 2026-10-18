@@ -1,3 +1,11 @@
-if [ -f "$HOME/.bashrc" ]; then
-  source "$HOME/.bashrc"
+# ~/.bash_profile — managed by chezmoi
+
+# Login environment
+if [[ -f "$HOME/.profile" ]]; then
+    source "$HOME/.profile"
+fi
+
+# Interactive Bash configuration
+if [[ -f "$HOME/.bashrc" ]]; then
+    source "$HOME/.bashrc"
 fi
