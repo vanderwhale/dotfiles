@@ -4,7 +4,7 @@
 {{- with (index . "gitEmail") -}}{{- $gitEmail = . -}}{{- end -}}
 {{- $gitSigningKey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFgDmVincJpZdNCe8pzVsNLEkGHIJgHG3efagza7eFA" -}}
 {{- with (index . "gitSigningKey") -}}{{- $gitSigningKey = . -}}{{- end -}}
-{{- $gitGpgSign := true -}}
+{{- $gitGpgSign := eq .chezmoi.os "darwin" -}}
 {{- if hasKey . "gitGpgSign" -}}{{- $gitGpgSign = .gitGpgSign -}}{{- end -}}
 {{- $gitSshSigningProgram := "" -}}
 {{- with (index . "gitSshSigningProgram") -}}{{- $gitSshSigningProgram = . -}}{{- end -}}
@@ -22,11 +22,6 @@
 [gpg]
 	format = ssh
 
-{{ if eq .chezmoi.os "windows" -}}
-[core]
-	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
-
-{{ end -}}
 {{ if $gitSshSigningProgram -}}
 [gpg "ssh"]
 	program = {{ $gitSshSigningProgram }}
@@ -43,6 +38,12 @@
 
 [init]
 	defaultBranch = main
+
+[core]
+	editor = micro
+{{ if eq .chezmoi.os "windows" -}}
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+{{ end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
 [diff]

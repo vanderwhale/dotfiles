@@ -13,6 +13,15 @@
 {{-   end -}}
 {{- end -}}
 sourceDir = {{ .chezmoi.sourceDir | quote }}
+umask = 0o022
+
+[edit]
+    command = "micro"
+{{ if eq .chezmoi.os "darwin" -}}
+[diff]
+    command = "kitten"
+    args = ["diff"]
+{{ end -}}
 
 [data]
     # personal: trusted personal macOS, Fedora, and Windows computers
