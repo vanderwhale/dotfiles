@@ -10,8 +10,10 @@ HISTFILESIZE=20000
 shopt -s histappend
 shopt -s checkwinsize
 
-# User executables
-[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+# User executables — also support non-login interactive shells
+if [[ -d "$HOME/.local/bin" && ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # macOS Homebrew
 if [[ "$(uname)" == "Darwin" && -d /opt/homebrew/bin ]]; then

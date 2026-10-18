@@ -2,16 +2,17 @@
 # Environment configuration for login shells.
 
 # User executables
-if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+# User executables — avoid duplicate PATH entries
+for dir in "$HOME/bin" "$HOME/.local/bin"; do
+    if [ -d "$dir" ]; then
+        case ":$PATH:" in
+            *":$dir:"*) ;;
+            *) PATH="$dir:$PATH" ;;
+        esac
+    fi
+done
 
 export PATH
-
 # Rust
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
