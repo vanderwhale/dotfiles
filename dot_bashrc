@@ -20,6 +20,10 @@ fi
 
 # Linux utilities
 if [[ "$(uname)" == "Linux" ]]; then
+	# fd-find (Ubuntu/Debian package naming)
+	if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
+	    alias fd='fdfind'
+	fi
     [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
     if [[ -x /usr/bin/dircolors ]]; then
