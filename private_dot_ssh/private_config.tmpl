@@ -29,6 +29,16 @@ Host emerald-sara
 Host takodana
     HostName 10.100.41.10
     User maz
+    IdentitiesOnly yes
+
+Host ilum 10.100.91.10
+    HostName 10.100.91.10
+    User root
+    IdentityFile ~/.ssh/1Password/SHA256_70mXNEAGDHIdSe+rXYtvC4JBWWPLYyKPBoYEk1S8W8U.pub
+    IdentitiesOnly yes
+    PreferredAuthentications publickey,password
+    PubkeyAuthentication yes
+    PasswordAuthentication yes
 
 Host blue
     HostName 10.0.0.50
@@ -37,6 +47,7 @@ Host blue
 Host yavin
     HostName 10.100.11.21
     User darths
+    IdentitiesOnly yes
 
 # --- basecamp ---
 
