@@ -42,12 +42,17 @@ Library/
 {{ end }}
 
 {{ if eq $profile "server" }}
-# Servers receive shell configuration only, without personal identity or GUI apps.
+.config/Code/
+.config/vscode/
+.local/bin/vscode-extensions
+Library/Application Support/Code/
+AppData/Roaming/Code/
+# Servers receive shell configuration and Starship, without SSH or personal identity.
+.ssh/
 .Rprofile
 .config/gh/
 .config/kitty/
 .config/rstudio/
-.config/starship.toml
 .gitconfig
 {{ end }}
 

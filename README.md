@@ -39,8 +39,9 @@ During initialization, choose a machine profile:
 - `shared` for the shared Mac. It receives the Mac customizations and uses the
   1Password agent belonging to the signed-in macOS account. Initialization also
   records that Mac's Git identity and 1Password signing public key locally.
-- `server` for Debian and Ubuntu servers. It receives shell configuration but
-  no personal Git identity, GitHub CLI configuration, or desktop-app settings.
+- `server` for Debian and Ubuntu servers. It receives shell configuration and
+  Starship styling, but no SSH configuration, personal Git identity, GitHub CLI
+  configuration, or desktop-app settings. Its diff tool is plain `diff -u`.
 - `work` for the work Windows computer. It receives only the PowerShell profile.
 
 Clone and apply these dotfiles with chezmoi. Use the SSH URL if the machine
